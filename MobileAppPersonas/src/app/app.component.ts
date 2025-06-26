@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { add, home, settings, person,
+  peopleOutline, 
+  chevronDownCircleOutline,
+  addOutline,
+  homeOutline,
+  settingsOutline,
+  close,
+  save,
+ } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +22,23 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+     this.registerIcons();
+  }
+
+   private registerIcons() {
+    addIcons({
+      'people-outline': peopleOutline,
+      'chevron-down-circle-outline': chevronDownCircleOutline,
+      'add-outline': addOutline,
+      'home-outline': homeOutline,
+      'settings-outline': settingsOutline,
+      'add': add,
+      'home': home,
+      'settings': settings,
+      'person': person,
+      'close': close,
+      'save': save,
+    });
+  }
 }

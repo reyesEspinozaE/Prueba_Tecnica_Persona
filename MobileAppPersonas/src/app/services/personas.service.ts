@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { ConfigService } from './config.service';
 
 export interface Persona {
   id?: number;
@@ -19,13 +20,24 @@ export interface Persona {
 })
 export class PersonaService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://localhost:5001/api/personas'; // Cambia por tu URL real
+  private readonly config = inject(ConfigService);
+  private readonly baseUrl = this.config.getApiUrl('Personas');
+
+  // Método privado para obtener headers con autenticación
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders(this.config.getAuthHeaders())
+    };
+  }
 
   // Obtener todas las personas
-  obtenerPersonas(): Observable<Persona[]> {
-    return this.http.get<Persona[]>(this.baseUrl)
-      .pipe(catchError(this.manejarError));
-  }
+obtenerPersonas(): Observable<Persona[]> {
+  return this.http.get<Persona[]>(this.baseUrl, this.getHttpOptions())
+    .pipe(
+      // tap(personas => console.log('Personas obtenidas:', personas)),
+      catchError(this.manejarError)
+    );    
+}
 
   // Obtener persona por ID
   obtenerPersonaPorId(id: number): Observable<Persona> {
