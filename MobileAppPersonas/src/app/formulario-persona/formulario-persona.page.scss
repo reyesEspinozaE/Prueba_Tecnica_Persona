@@ -1,0 +1,98 @@
+// formulario-persona.page.scss
+ion-item {
+  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+  --border-radius: 8px;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  margin: 8px 16px;
+  
+  &.ion-invalid {
+    --border-color: var(--ion-color-danger);
+    --highlight-color-focused: var(--ion-color-danger);
+  }
+  
+  &.ion-valid {
+    --border-color: var(--ion-color-success);
+    --highlight-color-focused: var(--ion-color-success);
+  }
+}
+
+ion-label {
+  font-weight: 500;
+  
+  ion-text[color="danger"] {
+    font-weight: bold;
+  }
+}
+
+ion-note[slot="error"] {
+  font-size: 0.75rem;
+  color: var(--ion-color-danger);
+  margin-top: 4px;
+  display: block;
+}
+
+ion-button {
+  font-weight: 500;
+  
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+ion-grid {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+ion-textarea {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+// Mejorar el aspecto del datetime
+ion-datetime-button {
+  width: 100%;
+}
+
+// Estilo para campos requeridos
+.required-info {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  
+  p {
+    font-size: 0.85rem;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+// Responsive design para formulario
+@media (min-width: 768px) {
+  ion-item {
+    margin: 8px 32px;
+  }
+  
+  ion-grid {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+// Animaciones suaves
+ion-item,
+ion-button {
+  transition: all 0.2s ease-in-out;
+}
+
+ion-button:hover:not([disabled]) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .avatar-placeholder {
+    background: var(--ion-color-primary-shade);
+  }
+}

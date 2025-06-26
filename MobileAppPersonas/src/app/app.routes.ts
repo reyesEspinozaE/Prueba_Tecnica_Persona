@@ -1,9 +1,25 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: 'main', loadComponent: () => import('./main/main.page').then(m => m.MainPage) },
   {
-    path: 'persona-list',
-    loadComponent: () => import('./persona-list/persona-list.page').then( m => m.PersonaListPage)
+    path: '',
+    redirectTo: '/lista-personas',
+    pathMatch: 'full'
+  },
+  {
+    path: 'lista-personas',
+    loadComponent: () => import('./lista-persona/lista-persona.page').then(m => m.ListaPersonasPage)
+  },
+  {
+    path: 'formulario-persona',
+    loadComponent: () => import('./formulario-persona/formulario-persona.page').then(m => m.FormularioPersonaPage)
+  },
+  {
+    path: 'formulario-persona/:id',
+    loadComponent: () => import('./formulario-persona/formulario-persona.page').then(m => m.FormularioPersonaPage)
+  },
+  {
+    path: '**',
+    redirectTo: '/lista-personas'
   }
 ];

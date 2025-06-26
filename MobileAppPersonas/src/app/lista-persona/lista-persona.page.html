@@ -1,0 +1,123 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Lista de Personas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Header con buscador -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Personas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Barra de búsqueda -->
+  <ion-searchbar 
+    placeholder="Buscar por nombre, apellido o email"
+    [value]="terminoBusqueda"
+    (ionInput)="buscarPersonas($event)"
+    debounce="500">
+  </ion-searchbar>
+
+  <!-- Botón para agregar nueva persona -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregarPersona()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refrescar($event)">
+    <ion-refresher-content
+      pulling-icon="chevron-down-circle-outline"
+      pulling-text="Tirar para refrescar"
+      refreshing-spinner="circles"
+      refreshing-text="Refrescando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Lista de personas -->
+  <div *ngIf="!cargando">
+    <!-- Mensaje cuando no hay personas -->
+    <ion-card *ngIf="personasFiltradas.length === 0 && terminoBusqueda === ''">
+      <ion-card-content class="ion-text-center">
+        <ion-icon name="people-outline" size="large" color="medium"></ion-icon>
+        <h2>No hay personas registradas</h2>
+        <p>Toca el botón + para agregar la primera persona</p>
+        <ion-button fill="outline" (click)="agregarPersona()">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Agregar Persona
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mensaje cuando no hay resultados de búsqueda -->
+    <ion-card *ngIf="personasFiltradas.length === 0 && terminoBusqueda !== ''">
+      <ion-card-content class="ion-text-center">
+        <ion-icon name="search-outline" size="large" color="medium"></ion-icon>
+        <h2>Sin resultados</h2>
+        <p>No se encontraron personas que coincidan con "{{ terminoBusqueda }}"</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lista de personas -->
+    <ion-list *ngIf="personasFiltradas.length > 0">
+      <ion-item-sliding *ngFor="let persona of personasFiltradas; trackBy: trackByPersonaId">
+        <ion-item button>
+          <ion-avatar slot="start">
+            <div class="avatar-placeholder">
+              {{ persona.nombre.charAt(0) + persona.apellido.charAt(0) }}
+            </div>
+          </ion-avatar>
+          
+          <ion-label>
+            <h2>{{ persona.nombre }} {{ persona.apellido }}</h2>
+            <p>{{ persona.email }}</p>
+            <p *ngIf="persona.telefono">
+              <ion-icon name="call-outline" size="small"></ion-icon>
+              {{ persona.telefono }}
+            </p>
+          </ion-label>
+
+          <!-- Botones de acción -->
+          <ion-button 
+            fill="clear" 
+            slot="end" 
+            (click)="editarPersona(persona)"
+            color="primary">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          
+          <ion-button 
+            fill="clear" 
+            slot="end" 
+            (click)="eliminarPersona(persona)"
+            color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <!-- Opciones deslizables -->
+        <ion-item-options side="end">
+          <ion-item-option 
+            color="primary" 
+            (click)="editarPersona(persona)">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+          <ion-item-option 
+            color="danger" 
+            (click)="eliminarPersona(persona)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <!-- Indicador de carga -->
+  <div *ngIf="cargando" class="ion-text-center ion-padding">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando personas...</p>
+  </div>
+</ion-content>
