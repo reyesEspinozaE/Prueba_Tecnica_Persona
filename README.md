@@ -39,9 +39,9 @@ Editar el archivo src/environments/environment.ts:
 
 typescript
 - export const environment = {
-  production: false,
-  apiUrl: 'https://localhost:7163/api',
-  apiToken: 'KvoVsjSoPGH9ojSB3x3QE4BVWl4m6unW6VTwpPoXZI'
+  - production: false,
+  - apiUrl: 'https://localhost:7163/api',
+  - apiToken: 'KvoVsjSoPGH9ojSB3x3QE4BVWl4m6unW6VTwpPoXZI'
 };
 
 4. Ejecutar en modo desarrollo
