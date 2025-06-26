@@ -1,11 +1,11 @@
 <ion-app>
-  <ion-menu contentId="main-content">
+  <ion-menu contentId="main">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu Content</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
+    <ion-content>
     <ion-list>
       <ion-menu-toggle>
       <ion-item button [routerLink]="['/main']">
@@ -16,6 +16,7 @@
       </ion-item>
       </ion-menu-toggle>
     </ion-list>
+    </ion-content>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
