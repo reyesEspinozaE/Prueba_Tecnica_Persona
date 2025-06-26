@@ -171,12 +171,12 @@ export class PersonaService {
       );
   }
 
-  // Método para obtener el valor actual de personas (sin suscripción)
+  // Método para obtener el valor actual de personas
   obtenerPersonasActuales(): Persona[] {
     return this.personasSubject.value;
   }
 
-  // Método para limpiar la lista (útil para logout)
+  // Método para limpiar la lista 
   limpiarPersonas(): void {
     this.personasSubject.next([]);
     this.personasCargadas = false;
