@@ -9,6 +9,11 @@ import { add, home, settings, person,
   settingsOutline,
   close,
   save,
+  createOutline,
+  trash,
+  trashOutline,
+  callOutline,
+  create,
  } from 'ionicons/icons';
 
 @Component({
@@ -39,6 +44,11 @@ export class AppComponent {
       'person': person,
       'close': close,
       'save': save,
+      'create-outline': createOutline,
+      'trash': trash,
+      'trash-outline': trashOutline,
+      'call-outline': callOutline,
+      'create': create
     });
   }
 }
