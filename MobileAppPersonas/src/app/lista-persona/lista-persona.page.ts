@@ -48,7 +48,7 @@ export class ListaPersonasPage implements OnInit {
     this.cargarPersonas();
   }
 
-  async cargarPersonas() {
+   async cargarPersonas() {
     const loading = await this.loadingController.create({
       message: 'Cargando personas...',
       spinner: 'crescent'
@@ -71,7 +71,7 @@ export class ListaPersonasPage implements OnInit {
       }
     });
   }
-
+  
   // Función de búsqueda
   async buscarPersonas(event: any) {
     this.terminoBusqueda = event.target.value;
@@ -118,7 +118,7 @@ export class ListaPersonasPage implements OnInit {
 
   // Navegar al formulario para editar persona
   editarPersona(persona: Persona) {
-    this.router.navigate(['/formulario-persona', persona.id]);
+    this.router.navigate(['/formulario-persona', persona.idPersona]);
   }
 
   // Confirmar y eliminar persona
@@ -151,7 +151,7 @@ export class ListaPersonasPage implements OnInit {
     });
     await loading.present();
 
-    this.personaService.eliminarPersona(persona.id!).subscribe({
+    this.personaService.eliminarPersona(persona.idPersona!).subscribe({
       next: async () => {
         loading.dismiss();
         await this.mostrarExito('Persona eliminada con éxito');
@@ -181,7 +181,7 @@ export class ListaPersonasPage implements OnInit {
 
   // Función para trackBy en ngFor (mejora el rendimiento)
   trackByPersonaId(index: number, persona: Persona): number {
-    return persona.id || index;
+    return persona.idPersona || index;
   }
 
   // Mostrar mensaje de éxito

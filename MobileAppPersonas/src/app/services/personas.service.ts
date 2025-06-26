@@ -5,11 +5,12 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
+import { switchMap } from 'rxjs';
 
 export interface Persona {
-  id?: number;
+  idPersona?: number;
   nombre: string;
   apellido: string;
   fechaNacimiento: string;
@@ -36,8 +37,12 @@ export class PersonaService {
 
   // Obtener todas las personas
   obtenerPersonas(): Observable<Persona[]> {
-    return this.http.get<Persona[]>(this.baseUrl, this.getHttpOptions()).pipe(
-      // tap(personas => console.log('Personas obtenidas:', personas)),
+    return this.http.get<any>(this.baseUrl, this.getHttpOptions()).pipe(
+      map((response) => {
+        // Extraer solo el array de personas del campo 'data'
+        return response.data || [];
+      }),
+      // tap(personas => console.log('Personas extraídas:', personas)),
       catchError(this.manejarError)
     );
   }
@@ -59,14 +64,14 @@ export class PersonaService {
   // Actualizar persona existente
   actualizarPersona(id: number, persona: Persona): Observable<Persona> {
     return this.http
-      .put<Persona>(`${this.baseUrl}/${id}`, persona)
+      .put<Persona>(`${this.baseUrl}/${id}`, persona, this.getHttpOptions())
       .pipe(catchError(this.manejarError));
   }
 
   // Eliminar persona
   eliminarPersona(id: number): Observable<void> {
     return this.http
-      .delete<void>(`${this.baseUrl}/${id}`)
+      .delete<void>(`${this.baseUrl}/${id}`, this.getHttpOptions())
       .pipe(catchError(this.manejarError));
   }
 
