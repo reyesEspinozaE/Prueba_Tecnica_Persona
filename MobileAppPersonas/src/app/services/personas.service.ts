@@ -1,5 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
@@ -16,7 +20,7 @@ export interface Persona {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PersonaService {
   private readonly http = inject(HttpClient);
@@ -26,54 +30,58 @@ export class PersonaService {
   // Método privado para obtener headers con autenticación
   private getHttpOptions() {
     return {
-      headers: new HttpHeaders(this.config.getAuthHeaders())
+      headers: new HttpHeaders(this.config.getAuthHeaders()),
     };
   }
 
   // Obtener todas las personas
-obtenerPersonas(): Observable<Persona[]> {
-  return this.http.get<Persona[]>(this.baseUrl, this.getHttpOptions())
-    .pipe(
+  obtenerPersonas(): Observable<Persona[]> {
+    return this.http.get<Persona[]>(this.baseUrl, this.getHttpOptions()).pipe(
       // tap(personas => console.log('Personas obtenidas:', personas)),
       catchError(this.manejarError)
-    );    
-}
+    );
+  }
 
   // Obtener persona por ID
   obtenerPersonaPorId(id: number): Observable<Persona> {
-    return this.http.get<Persona>(`${this.baseUrl}/${id}`)
+    return this.http
+      .get<Persona>(`${this.baseUrl}/${id}`, this.getHttpOptions())
       .pipe(catchError(this.manejarError));
   }
 
   // Crear nueva persona
   crearPersona(persona: Persona): Observable<Persona> {
-    return this.http.post<Persona>(this.baseUrl, persona)
+    return this.http
+      .post<Persona>(this.baseUrl, persona, this.getHttpOptions())
       .pipe(catchError(this.manejarError));
   }
 
   // Actualizar persona existente
   actualizarPersona(id: number, persona: Persona): Observable<Persona> {
-    return this.http.put<Persona>(`${this.baseUrl}/${id}`, persona)
+    return this.http
+      .put<Persona>(`${this.baseUrl}/${id}`, persona)
       .pipe(catchError(this.manejarError));
   }
 
   // Eliminar persona
   eliminarPersona(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`)
+    return this.http
+      .delete<void>(`${this.baseUrl}/${id}`)
       .pipe(catchError(this.manejarError));
   }
 
   // Buscar personas
   buscarPersonas(query: string): Observable<Persona[]> {
     const params = `?nombre=${query}&apellido=${query}&email=${query}`;
-    return this.http.get<Persona[]>(`${this.baseUrl}/buscar${params}`)
+    return this.http
+      .get<Persona[]>(`${this.baseUrl}/buscar${params}`, this.getHttpOptions())
       .pipe(catchError(this.manejarError));
   }
 
   // Manejo centralizado de errores
   private manejarError(error: HttpErrorResponse) {
     let mensajeError = 'Ocurrió un error desconocido.';
-    
+
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente
       mensajeError = `Error: ${error.error.message}`;
@@ -90,13 +98,14 @@ obtenerPersonas(): Observable<Persona[]> {
           mensajeError = 'Error interno del servidor.';
           break;
         case 0:
-          mensajeError = 'No se pudo conectar con el servidor. Verifique su conexión a internet.';
+          mensajeError =
+            'No se pudo conectar con el servidor. Verifique su conexión a internet.';
           break;
         default:
           mensajeError = `Error del servidor: ${error.status} - ${error.message}`;
       }
     }
-    
+
     console.error('Error en PersonaService:', error);
     return throwError(() => new Error(mensajeError));
   }

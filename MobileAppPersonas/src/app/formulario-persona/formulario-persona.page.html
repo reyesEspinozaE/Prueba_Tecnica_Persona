@@ -15,11 +15,7 @@
         <ion-label position="stacked">
           Nombre <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input
-          formControlName="nombre"
-          placeholder="Ingrese el nombre"
-          type="text"
-          clearInput="true">
+        <ion-input formControlName="nombre" placeholder="Ingrese el nombre" type="text" clearInput="true">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('nombre')">
           {{ obtenerMensajeError('nombre') }}
@@ -31,11 +27,7 @@
         <ion-label position="stacked">
           Apellido <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input
-          formControlName="apellido"
-          placeholder="Ingrese el apellido"
-          type="text"
-          clearInput="true">
+        <ion-input formControlName="apellido" placeholder="Ingrese el apellido" type="text" clearInput="true">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('apellido')">
           {{ obtenerMensajeError('apellido') }}
@@ -47,21 +39,9 @@
         <ion-label position="stacked">
           Fecha de Nacimiento <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-datetime-button datetime="fechaNacimiento"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              id="fechaNacimiento"
-              formControlName="fechaNacimiento"
-              presentation="date"
-              [max]="fechaMaxima"
-              [min]="fechaMinima"
-              show-default-buttons="true"
-              doneText="Confirmar"
-              cancelText="Cancelar">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
+        <ion-datetime formControlName="fechaNacimiento" presentation="date" [max]="fechaMaxima" [min]="fechaMinima"
+          placeholder="Seleccione una fecha">
+        </ion-datetime>
         <ion-note slot="error" *ngIf="tieneError('fechaNacimiento')">
           {{ obtenerMensajeError('fechaNacimiento') }}
         </ion-note>
@@ -72,11 +52,7 @@
         <ion-label position="stacked">
           Email <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input
-          formControlName="email"
-          placeholder="ejemplo@correo.com"
-          type="email"
-          clearInput="true">
+        <ion-input formControlName="email" placeholder="ejemplo@correo.com" type="email" clearInput="true">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('email')">
           {{ obtenerMensajeError('email') }}
@@ -86,11 +62,7 @@
       <!-- Teléfono -->
       <ion-item [class.ion-invalid]="tieneError('telefono')">
         <ion-label position="stacked">Teléfono</ion-label>
-        <ion-input
-          formControlName="telefono"
-          placeholder="Ingrese el teléfono"
-          type="tel"
-          clearInput="true">
+        <ion-input formControlName="telefono" placeholder="Ingrese el teléfono" type="tel" clearInput="true">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('telefono')">
           {{ obtenerMensajeError('telefono') }}
@@ -100,11 +72,7 @@
       <!-- Dirección -->
       <ion-item [class.ion-invalid]="tieneError('direccion')">
         <ion-label position="stacked">Dirección</ion-label>
-        <ion-textarea
-          formControlName="direccion"
-          placeholder="Ingrese la dirección"
-          rows="3"
-          maxlength="200">
+        <ion-textarea formControlName="direccion" placeholder="Ingrese la dirección" rows="3" maxlength="200">
         </ion-textarea>
         <ion-note slot="error" *ngIf="tieneError('direccion')">
           {{ obtenerMensajeError('direccion') }}
@@ -116,21 +84,13 @@
     <ion-grid class="ion-padding">
       <ion-row>
         <ion-col size="6">
-          <ion-button 
-            expand="block" 
-            fill="outline" 
-            color="medium"
-            type="button"
-            (click)="cancelar()">
+          <ion-button expand="block" fill="outline" color="medium" type="button" (click)="cancelar()">
             <ion-icon name="close" slot="start"></ion-icon>
             Cancelar
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button 
-            expand="block" 
-            type="submit"
-            [disabled]="formularioPersona.invalid">
+          <ion-button expand="block" type="submit" [disabled]="formularioPersona.invalid">
             <ion-icon name="save" slot="start"></ion-icon>
             {{ esEdicion ? 'Actualizar' : 'Guardar' }}
           </ion-button>
