@@ -12,10 +12,10 @@ Aplicación móvil desarrollada en Ionic + Angular + TypeScript para la gestión
 - Manejo de errores: Feedback claro al usuario
 
 🛠️ Tecnologías utilizadas
-Ionic 7
-Angular 16+
-TypeScript
-HTML5 / CSS3
+- Ionic 7
+- Angular 16+
+- TypeScript
+- HTML5 / CSS3
 
 📋 Prerrequisitos
 - Node.js 16 o superior
@@ -38,7 +38,7 @@ npm install
 Editar el archivo src/environments/environment.ts:
 
 typescript
-export const environment = {
+- export const environment = {
   production: false,
   apiUrl: 'https://localhost:7163/api',
   apiToken: 'KvoVsjSoPGH9ojSB3x3QE4BVWl4m6unW6VTwpPoXZI'
@@ -62,8 +62,8 @@ La aplicación estará disponible en: http://localhost:8100
 🔍 Búsqueda y filtros
 - Búsqueda por nombre, apellido o email
 - Filtros en tiempo real
+- Resultados instantáneos
 
-Resultados instantáneos
 ➕ Crear persona
 
 - Formulario completo con validaciones
@@ -128,7 +128,7 @@ Endpoints utilizados:
 - GET /api/personas/buscar - Busca personas
 
 📦 Dependencias principales
-json
+- json
 {
   "@ionic/angular": "^7.0.0",
   "@angular/core": "^16.0.0",
@@ -141,7 +141,7 @@ json
 Este proyecto es para fines de evaluación técnica.
 
 👨‍💻 Autor
-Everth Reyes Espinoza
+- Everth Reyes Espinoza
 
-GitHub: @reyesEspinozaE
-Desarrollado como parte de una prueba técnica - 2025
+- GitHub: @reyesEspinozaE
+- Desarrollado como parte de una prueba técnica - 2025
