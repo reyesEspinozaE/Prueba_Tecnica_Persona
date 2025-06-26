@@ -31,7 +31,7 @@ Aplicación móvil desarrollada en Ionic + Angular + TypeScript para la gestión
 
 3. Instalar dependencias
 
-npm install
+- npm install
 
 5. Configurar variables de entorno
    
