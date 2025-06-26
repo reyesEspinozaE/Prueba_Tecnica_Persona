@@ -246,12 +246,12 @@ export class FormularioPersonaPage implements OnInit {
     let mensaje = '';
 
     if (tipoError === 'caracteres') {
-      mensaje = `El teléfono "${telefonoIngresado}" contiene caracteres no válidos.<br><br>Solo se permiten <strong>números</strong> (0-9).`;
+      mensaje = `El teléfono "${telefonoIngresado}" contiene caracteres no válidos. Solo se permiten números (0-9).`;
     } else if (tipoError === 'longitud') {
       const longitud = telefonoIngresado.length;
       mensaje = `El teléfono "${telefonoIngresado}" tiene ${longitud} dígito${
         longitud !== 1 ? 's' : ''
-      }.<br><br>Debe tener exactamente <strong>8 dígitos</strong> para línea fija o móvil.`;
+      }. Debe tener exactamente 8 dígitos para línea fija o móvil.`;
     }
 
     const alert = await this.alertController.create({
