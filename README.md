@@ -1,4 +1,5 @@
 Prueba Técnica Persona - App Móvil
+
 Aplicación móvil desarrollada en Ionic + Angular + TypeScript para la gestión de personas, con interfaz intuitiva y conexión a API REST.
 
 🚀 Características
@@ -25,12 +26,11 @@ HTML5 / CSS3
 ⚙️ Instalación y configuración
 
 1. Clonar el repositorio
-bash
-git clone https://github.com/reyesEspinozaE/Prueba_Tecnica_Persona.git
-cd Prueba_Tecnica_Persona
+- git clone https://github.com/reyesEspinozaE/Prueba_Tecnica_Persona.git
+- cd Prueba_Tecnica_Persona
 
 3. Instalar dependencias
-bash
+
 npm install
 
 5. Configurar variables de entorno
@@ -45,8 +45,9 @@ export const environment = {
 };
 
 4. Ejecutar en modo desarrollo
-bash
-ionic serve
+
+-ionic serve
+
 La aplicación estará disponible en: http://localhost:8100
 
 🎯 Funcionalidades principales
