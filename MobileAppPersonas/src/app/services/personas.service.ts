@@ -50,8 +50,9 @@ export class PersonaService {
   // Obtener persona por ID
   obtenerPersonaPorId(id: number): Observable<Persona> {
     return this.http
-      .get<Persona>(`${this.baseUrl}/${id}`, this.getHttpOptions())
-      .pipe(catchError(this.manejarError));
+      .get<any>(`${this.baseUrl}/${id}`, this.getHttpOptions())
+      .pipe(map(response => response.data), // Extraer solo los datos
+      catchError(this.manejarError));
   }
 
   // Crear nueva persona
@@ -64,8 +65,9 @@ export class PersonaService {
   // Actualizar persona existente
   actualizarPersona(id: number, persona: Persona): Observable<Persona> {
     return this.http
-      .put<Persona>(`${this.baseUrl}/${id}`, persona, this.getHttpOptions())
-      .pipe(catchError(this.manejarError));
+      .put<any>(`${this.baseUrl}/${id}`, persona, this.getHttpOptions())
+      .pipe(map(response => response.data || response), // Manejar respuesta estructurada
+      catchError(this.manejarError));
   }
 
   // Eliminar persona
@@ -77,10 +79,18 @@ export class PersonaService {
 
   // Buscar personas
   buscarPersonas(query: string): Observable<Persona[]> {
-    const params = `?nombre=${query}&apellido=${query}&email=${query}`;
+    const params = `?nombre=${encodeURIComponent(
+      query
+    )}&apellido=${encodeURIComponent(query)}&email=${encodeURIComponent(
+      query
+    )}`;
+
     return this.http
-      .get<Persona[]>(`${this.baseUrl}/buscar${params}`, this.getHttpOptions())
-      .pipe(catchError(this.manejarError));
+      .get<any>(`${this.baseUrl}/buscar${params}`, this.getHttpOptions())
+      .pipe(
+        map((response) => response.data || []),
+        catchError(this.manejarError)
+      );
   }
 
   // Manejo centralizado de errores

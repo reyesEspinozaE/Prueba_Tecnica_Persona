@@ -15,7 +15,8 @@
         <ion-label position="stacked">
           Nombre <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input formControlName="nombre" placeholder="Ingrese el nombre" type="text" clearInput="true">
+        <ion-input formControlName="nombre" placeholder="Ingrese el nombre" type="text" clearInput="true"
+          (ionInput)="validarTextoEnTiempoReal($event, 'nombre')" (ionBlur)="validarTextoAlSalir('nombre')">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('nombre')">
           {{ obtenerMensajeError('nombre') }}
@@ -27,7 +28,8 @@
         <ion-label position="stacked">
           Apellido <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input formControlName="apellido" placeholder="Ingrese el apellido" type="text" clearInput="true">
+        <ion-input formControlName="apellido" placeholder="Ingrese el apellido" type="text" clearInput="true"
+          (ionInput)="validarTextoEnTiempoReal($event, 'apellido')" (ionBlur)="validarTextoAlSalir('apellido')">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('apellido')">
           {{ obtenerMensajeError('apellido') }}
@@ -52,7 +54,8 @@
         <ion-label position="stacked">
           Email <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input formControlName="email" placeholder="ejemplo@correo.com" type="email" clearInput="true">
+        <ion-input formControlName="email" placeholder="ejemplo@correo.com" type="email" clearInput="true"
+          (ionBlur)="validarEmailEnTiempoReal()">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('email')">
           {{ obtenerMensajeError('email') }}
@@ -62,7 +65,8 @@
       <!-- Teléfono -->
       <ion-item [class.ion-invalid]="tieneError('telefono')">
         <ion-label position="stacked">Teléfono</ion-label>
-        <ion-input formControlName="telefono" placeholder="Ingrese el teléfono" type="tel" clearInput="true">
+        <ion-input formControlName="telefono" placeholder="Ingrese el teléfono" type="tel" clearInput="true"
+          maxlength="8" (ionInput)="validarTelefonoEnTiempoReal($event)" (ionBlur)="validarTelefonoAlSalir()">
         </ion-input>
         <ion-note slot="error" *ngIf="tieneError('telefono')">
           {{ obtenerMensajeError('telefono') }}
