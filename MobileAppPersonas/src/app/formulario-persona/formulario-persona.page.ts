@@ -149,10 +149,6 @@ export class FormularioPersonaPage implements OnInit {
       // Verificar si tiene errores específicos
       if (emailControl.errors?.['email']) {
         await this.mostrarAlertaEmailInvalido(valorEmail);
-
-        // Opcional: limpiar el campo o mantener el foco
-        // emailControl.setValue('');
-        // document.querySelector('ion-input[formControlName="email"] input')?.focus();
       }
     }
   }
@@ -185,7 +181,7 @@ export class FormularioPersonaPage implements OnInit {
     await alert.present();
   }
 
-  // 👇 Validador personalizado para teléfono
+  // Validador personalizado para teléfono
   private validadorTelefono(control: any) {
     if (!control.value) return null; // Permitir campo vacío (no es requerido)
 

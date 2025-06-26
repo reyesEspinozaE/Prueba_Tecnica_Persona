@@ -179,7 +179,6 @@ export class ListaPersonasPage implements OnInit {
     });
   }
 
-  // Función para trackBy en ngFor (mejora el rendimiento)
   trackByPersonaId(index: number, persona: Persona): number {
     return persona.idPersona || index;
   }
