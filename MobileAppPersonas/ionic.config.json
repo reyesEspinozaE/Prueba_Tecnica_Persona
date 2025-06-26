@@ -1,0 +1,7 @@
+{
+  "name": "MobileAppPersonas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
