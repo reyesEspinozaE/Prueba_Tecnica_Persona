@@ -522,10 +522,14 @@ export class FormularioPersonaPage implements OnInit {
       return 'El teléfono solo puede contener números.';
     if (errores['longitudIncorrecta'])
       return 'El teléfono debe tener exactamente 8 dígitos.';
-    if (errores['soloLetras']) 
-      return `${this.obtenerNombreCampo(campo)} solo puede contener letras y espacios.`;
-    if (errores['soloEspacios']) 
-      return `${this.obtenerNombreCampo(campo)} no puede estar vacío o contener solo espacios.`;
+    if (errores['soloLetras'])
+      return `${this.obtenerNombreCampo(
+        campo
+      )} solo puede contener letras y espacios.`;
+    if (errores['soloEspacios'])
+      return `${this.obtenerNombreCampo(
+        campo
+      )} no puede estar vacío o contener solo espacios.`;
 
     return 'Campo inválido.';
   }
